@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "venues")
@@ -19,8 +20,9 @@ public class Venue {
     @NotBlank
     private String name;
 
-    @NotBlank
-    private String city;
+    @NotNull
+    @ManyToOne
+    private City city;
 
     @NotBlank
     private String address;

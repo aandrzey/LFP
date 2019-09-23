@@ -5,6 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import pl.lfp.fixture.impl.CityFixtureImpl;
 import pl.lfp.fixture.impl.RoleFixtureImpl;
 import pl.lfp.fixture.impl.UserFixtureImpl;
 
@@ -13,11 +14,13 @@ public class LfpApplication {
 
     private final RoleFixtureImpl roleFixture;
     private final UserFixtureImpl userFixture;
+    private final CityFixtureImpl cityFixture;
 
     @Autowired
-    public LfpApplication(RoleFixtureImpl roleFixture, UserFixtureImpl userFixture) {
+    public LfpApplication(RoleFixtureImpl roleFixture, UserFixtureImpl userFixture, CityFixtureImpl cityFixture) {
         this.roleFixture = roleFixture;
         this.userFixture = userFixture;
+        this.cityFixture = cityFixture;
     }
 
     public static void main(String[] args) {
@@ -31,6 +34,7 @@ public class LfpApplication {
 
             roleFixture.loadData();
             userFixture.loadData();
+            cityFixture.loadData();
         };
     }
 

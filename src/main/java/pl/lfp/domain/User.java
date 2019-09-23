@@ -26,6 +26,7 @@ public class User {
     private String username;
 
     //todo zmienić validację na emailu
+    @NotBlank
     @Email
     @Column(unique = true)
     private String email;

@@ -23,6 +23,7 @@ public class UserFixtureImpl implements Fixture {
             User user = new User();
             user.setUsername("admin");
             user.setPassword("admin");
+            user.setEmail("admin@admin.pl");
             userService.saveAdmin(user);
         }
         if (userService.findUserByUsername("user") == null) { //tworze admina
@@ -30,6 +31,7 @@ public class UserFixtureImpl implements Fixture {
             User user = new User();
             user.setUsername("user");
             user.setPassword("user");
+            user.setEmail("user@user.pl");
             userService.saveUser(user);
         }
     }

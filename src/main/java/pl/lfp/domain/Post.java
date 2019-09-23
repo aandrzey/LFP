@@ -30,8 +30,8 @@ public class Post {
     @Size(max = 500)
     private String description;
 
-    //todo dropdown z miastem (jak przechowywać miasta)
-    private String city;
+    @ManyToOne
+    private City city;
 
     @NotNull
     @ManyToOne
