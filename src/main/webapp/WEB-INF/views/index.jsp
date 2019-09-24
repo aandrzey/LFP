@@ -15,9 +15,12 @@
     <link href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
-<%@include file="fragments/header.jspf"%>
-<h1>Hello</h1>
-<img src="images/200.gif">
+<%@include file="fragments/header.jspf" %>
+
+<div class="container">
+    <h1>Hello</h1>
+    <img src="images/200.gif">
+</div>
 
 </body>
 </html>

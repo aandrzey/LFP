@@ -34,4 +34,11 @@ public class CityServiceImpl implements CityService {
     public Long count() {
         return cityRepository.count();
     }
+
+    @Override
+    public List<City> getCitiesSorted() {
+        return cityRepository.findAllSorted();
+    }
+
+
 }

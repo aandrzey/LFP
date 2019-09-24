@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: andrzej
   Date: 24.09.2019
-  Time: 09:42
+  Time: 12:26
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -14,14 +14,18 @@
     <link href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<%@include file="fragments/header.jspf" %>
+<%@include file="fragments/header.jspf"%>
+
 <div class="container">
-    <form method="post">
-        <div><label> User Name : <input type="text" name="username"/> </label></div>
-        <div><label> Password: <input type="password" name="password"/> </label></div>
-        <div><input type="submit" value="Sign In"/></div>
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-    </form>
+    <h2>Profil użytkownika</h2>
+    <p>Username: <sec:authentication property="principal.user.username"/></p>
+    <p>Email: <sec:authentication property="principal.user.email"/></p>
+    <a href="/update">Edytuj</a>
+    <br><br>
+    <a href="/post">Dodaj post</a>
+    <br><br>
+    <a href="/venue">Dodaj miejsce</a>
+
 </div>
 </body>
 </html>

@@ -77,6 +77,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void updateUser(User user, UserDto userDto) {
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        userRepository.save(user);
+    }
+
+    @Override
     public boolean isUsernameUnique(String username) {
         User user = userRepository.findByUsername(username);
         return user == null;
@@ -87,4 +93,5 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByEmail(email);
         return user == null;
     }
+
 }

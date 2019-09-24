@@ -6,6 +6,5 @@ import pl.lfp.domain.Role;
 
 public interface RoleRepository extends JpaRepository<Role, Integer> {
 
-    @Query("select r from Role r where r.name = ?1")
     Role findByName(String name);
 }

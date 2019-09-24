@@ -11,8 +11,9 @@ public interface UserService {
     User findUserByUsername(String Username);
     User saveUser(User user);
     User saveAdmin(User user);
-    List<User>findAll();
+    List<User> findAll();
     User registerUser(UserDto userDto) throws RegisterFailedException;
+    void updateUser(User user, UserDto userDto);
     boolean isUsernameUnique(String username);
     boolean isEmailUnique(String email);
 

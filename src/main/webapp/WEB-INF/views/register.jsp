@@ -15,29 +15,34 @@
     <link href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<%@include file="fragments/header.jspf"%>
-<form:form modelAttribute="userDto" method="post">
-    <div>
-        <label for="idUsername">Username:</label>
-        <form:input path="username" id="idUsername"/>
-    </div>
-    <form:errors path="username" element="div"/>
-    <div>
-        <label for="idEmail">Email:</label>
-        <form:input path="email" id="idEmail"/>
-    </div>
-    <form:errors path="email" element="div"/>
-    <div>
-        <label for="idPassword">Hasło:</label>
-        <form:password path="password" id="idPassword"/>
-    </div>
-    <form:errors path="password" element="div"/>
-    <div>
-        <label for="idConfirmPassword">Powtórz hasło:</label>
-        <form:password path="confirmPassword" id="idConfirmPassword"/>
-    </div>
-    <form:errors path="confirmPassword" element="div"/>
-    <input type="submit" value="Zapisz"/>
-</form:form>
+<%@include file="fragments/header.jspf" %>
+
+<div class="container">
+
+    <form:form modelAttribute="userDto" method="post">
+        <div>
+            <label for="idUsername">Username:</label>
+            <form:input path="username" id="idUsername"/>
+        </div>
+        <form:errors path="username" element="div" cssClass="alert alert-danger"/>
+        <div>
+            <label for="idEmail">Email:</label>
+            <form:input path="email" id="idEmail"/>
+        </div>
+        <form:errors path="email" element="div" cssClass="alert alert-danger"/>
+        <div>
+            <label for="idPassword">Hasło:</label>
+            <form:password path="password" id="idPassword"/>
+        </div>
+        <form:errors path="password" element="div" cssClass="alert alert-danger"/>
+        <div>
+            <label for="idConfirmPassword">Powtórz hasło:</label>
+            <form:password path="confirmPassword" id="idConfirmPassword"/>
+        </div>
+        <form:errors path="confirmPassword" element="div" cssClass="alert alert-danger"/>
+        <input type="submit" value="Zapisz"/>
+    </form:form>
+
+</div>
 </body>
 </html>

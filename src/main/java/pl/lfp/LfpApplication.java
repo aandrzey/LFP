@@ -5,9 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import pl.lfp.fixture.impl.CityFixtureImpl;
-import pl.lfp.fixture.impl.RoleFixtureImpl;
-import pl.lfp.fixture.impl.UserFixtureImpl;
+import pl.lfp.fixture.impl.*;
 
 @SpringBootApplication
 public class LfpApplication {
@@ -15,12 +13,16 @@ public class LfpApplication {
     private final RoleFixtureImpl roleFixture;
     private final UserFixtureImpl userFixture;
     private final CityFixtureImpl cityFixture;
+    private final GameFixtureImpl gameFixture;
+    private final GameTypeFixtureImpl gameTypeFixture;
 
     @Autowired
-    public LfpApplication(RoleFixtureImpl roleFixture, UserFixtureImpl userFixture, CityFixtureImpl cityFixture) {
+    public LfpApplication(RoleFixtureImpl roleFixture, UserFixtureImpl userFixture, CityFixtureImpl cityFixture, GameFixtureImpl gameFixture, GameTypeFixtureImpl gameTypeFixture) {
         this.roleFixture = roleFixture;
         this.userFixture = userFixture;
         this.cityFixture = cityFixture;
+        this.gameFixture = gameFixture;
+        this.gameTypeFixture = gameTypeFixture;
     }
 
     public static void main(String[] args) {
@@ -35,6 +37,8 @@ public class LfpApplication {
             roleFixture.loadData();
             userFixture.loadData();
             cityFixture.loadData();
+            gameFixture.loadData();
+            gameTypeFixture.loadData();
         };
     }
 

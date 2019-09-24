@@ -1,36 +1,25 @@
-package pl.lfp.domain;
+package pl.lfp.domain.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
+import pl.lfp.domain.*;
 
-import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 
-@Entity
-@Table(name = "posts")
 @Getter
 @Setter
-public class Post {
+public class PostDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @ManyToOne
-    @NotNull
     private Game game;
 
-    @NotBlank
     @Size(max = 500)
     private String description;
 
-    @ManyToOne
     private City city;
 
-    @ManyToOne
     private Venue venue;
 
     private boolean privateVenue;
@@ -44,8 +33,6 @@ public class Post {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private Date dateStop;
 
-    @NotNull
-    @ManyToOne
     private GameType gameType;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
@@ -54,11 +41,7 @@ public class Post {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private Date updated;
 
-    @ManyToOne
     private User user;
 
-    @OneToMany(mappedBy = "post")
     private List<Comment> comments;
-
-
 }
