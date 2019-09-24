@@ -26,6 +26,11 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
+    public City saveCity(City city) {
+        return cityRepository.save(city);
+    }
+
+    @Override
     public Long count() {
         return cityRepository.count();
     }

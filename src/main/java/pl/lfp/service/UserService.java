@@ -1,6 +1,8 @@
 package pl.lfp.service;
 
 import pl.lfp.domain.User;
+import pl.lfp.domain.dto.UserDto;
+import pl.lfp.error.RegisterFailedException;
 
 import java.util.List;
 
@@ -10,5 +12,8 @@ public interface UserService {
     User saveUser(User user);
     User saveAdmin(User user);
     List<User>findAll();
+    User registerUser(UserDto userDto) throws RegisterFailedException;
+    boolean isUsernameUnique(String username);
+    boolean isEmailUnique(String email);
 
 }

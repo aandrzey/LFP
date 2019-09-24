@@ -11,7 +11,6 @@ import javax.persistence.*;
 @Table(name = "cities")
 @Getter
 @Setter
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class City {
 
     @Id
