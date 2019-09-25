@@ -12,12 +12,18 @@ import java.util.List;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
 
-    @Query("select p from Post p where p.city.name like %:city% and p.game.name like %:game% and p.venue.name like %:venue% and p.dateStart like %:date% and p.gameType.name like %:gameType%")
+    @Query("select p from Post p where p.city.name like %:city% and p.game.name like %:game% and p.venue.name like %:venue% and p.gameType.name like %:gameType% and p.dateStart >= :date")
     Page<Post> findAllSearch(@Param("city") String city,
                              @Param("game") String game,
                              @Param("venue") String venue,
                              @Param("date") Date date,
                              @Param("gameType") String gameType,
                              Pageable paging);
+
+
+    //Page<Post> findAllByCityNameContainingAndGameNameContainingAndVenueNameContainingAndDateStartAfterAndGameTypeNameContaining(String cityName, String gameName, String venueName, Date date, String gameType, Pageable paging);
+
+    @Query("select p from Post p where p.dateStart >= ?1")
+    List<Post>findDate(Date date);
 
 }

@@ -17,4 +17,6 @@ public interface PostService {
     List<Post> findAll(Integer pageNumber, Integer pageSize);
     Post save(Post post);
     Post findById(Long id);
+    List<Post>findDate(Date date);
+    Long count();
 }

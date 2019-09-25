@@ -25,16 +25,16 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<Post> findAllSearch(Integer pageNumber,
-                              Integer pageSize,
-                              String city,
-                              String game,
-                              String venue,
-                              Date date,
-                              String gameType) {
+                                    Integer pageSize,
+                                    String city,
+                                    String game,
+                                    String venue,
+                                    Date date,
+                                    String gameType) {
         Pageable paging = PageRequest.of(pageNumber, pageSize);
-        Page<Post> pagedResult = postRepository.findAllSearch(city, game, venue, date, gameType,paging);
+        Page<Post> pagedResult = postRepository.findAllSearch(city, game, venue, date, gameType, paging);
 
-        if(pagedResult.hasContent()){
+        if (pagedResult.hasContent()) {
             return pagedResult.getContent();
         } else {
             return new ArrayList<Post>();
@@ -46,7 +46,7 @@ public class PostServiceImpl implements PostService {
         Pageable paging = PageRequest.of(pageNumber, pageSize);
         Page<Post> pagedResult = postRepository.findAll(paging);
 
-        if(pagedResult.hasContent()){
+        if (pagedResult.hasContent()) {
             return pagedResult.getContent();
         } else {
             return new ArrayList<Post>();
@@ -55,7 +55,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Post save(Post post) {
-        if(post.getVenue().getId() == null){
+        if (post.getVenue().getId() == null) {
             post.setVenue(null);
         }
         return postRepository.save(post);
@@ -64,5 +64,15 @@ public class PostServiceImpl implements PostService {
     @Override
     public Post findById(Long id) {
         return postRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<Post> findDate(Date date) {
+        return postRepository.findDate(date);
+    }
+
+    @Override
+    public Long count() {
+        return postRepository.count();
     }
 }

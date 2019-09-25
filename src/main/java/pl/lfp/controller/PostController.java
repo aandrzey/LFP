@@ -64,18 +64,29 @@ public class PostController {
             session.setAttribute("pageSize", pageSize);
         }
         Date date;
-        if ("".equals(dateString)){
+
+        if ("".equals(dateString)) {
             date = new Date();
-        }
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            date = simpleDateFormat.parse(dateString);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            date = null;
+        } else {
+            try {
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                date = simpleDateFormat.parse(dateString);
+            } catch (ParseException e) {
+                e.printStackTrace();
+                date = null;
+            }
         }
         pageSize = (Integer) session.getAttribute("pageSize");
-        model.addAttribute("posts", postService.findAllSearch(pageNumber, pageSize, city, game, venue, date, gameType));
+
+        //Liczenie postów
+        Long count = postService.count();
+        Integer pages = count.intValue()/pageSize +1;
+
+        model.addAttribute("pages", pages);
+        model.addAttribute("currentPage", pageNumber);
+        model.addAttribute("posts", postService.findAll(pageNumber, pageSize));
+        //model.addAttribute("posts", postService.findAllSearch(pageNumber, pageSize, city, game, venue, date, gameType));
+        //model.addAttribute("posts", postService.findDate(date));
         return "posts";
     }
 
