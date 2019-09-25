@@ -33,4 +33,14 @@ public class Comment {
 
     @ManyToOne
     private Post post;
+
+    @PrePersist
+    public void prePersist() {
+        created = new Date();
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        updated = new Date();
+    }
 }

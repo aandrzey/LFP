@@ -5,34 +5,36 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 import pl.lfp.domain.*;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 
 @Getter
 @Setter
-public class PostDto {
+public class PostDto extends PostVenueDto {
 
+    @NotNull
     private Game game;
 
     @Size(max = 500)
+    @NotBlank
     private String description;
 
-    private City city;
+    @NotBlank
+    private String dateStart;
 
-    private Venue venue;
+    @NotBlank
+    private String timeStart;
 
-    private boolean privateVenue;
+    @NotBlank
+    private String dateStop;
 
-    @Size(min = 2, max = 30)
-    private String privateVenueName;
+    @NotBlank
+    private String timeStop;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-    private Date dateStart;
-
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-    private Date dateStop;
-
+    @NotNull
     private GameType gameType;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")

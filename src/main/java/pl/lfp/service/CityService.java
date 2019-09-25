@@ -9,4 +9,5 @@ public interface CityService {
     City saveCity(City city);
     Long count();
     List<City> getCitiesSorted();
+    City findById(Long id);
 }

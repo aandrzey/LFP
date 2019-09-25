@@ -28,6 +28,7 @@ public class Post {
     private String description;
 
     @ManyToOne
+    @NotNull
     private City city;
 
     @ManyToOne
@@ -39,9 +40,11 @@ public class Post {
     private String privateVenueName;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @NotNull
     private Date dateStart;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @NotNull
     private Date dateStop;
 
     @NotNull
@@ -60,5 +63,14 @@ public class Post {
     @OneToMany(mappedBy = "post")
     private List<Comment> comments;
 
+    @PrePersist
+    public void prePersist() {
+        created = new Date();
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        updated = new Date();
+    }
 
 }
