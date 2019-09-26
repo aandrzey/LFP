@@ -32,6 +32,7 @@ public class PostController {
     private GameService gameService;
     private GameTypeService gameTypeService;
     private CommentService commentService;
+    private RoleService roleService;
 
     @Autowired
     public PostController(PostService postService,
@@ -39,13 +40,14 @@ public class PostController {
                           VenueService venueService,
                           GameService gameService,
                           GameTypeService gameTypeService,
-                          CommentService commentService) {
+                          CommentService commentService, RoleService roleService) {
         this.postService = postService;
         this.cityService = cityService;
         this.venueService = venueService;
         this.gameService = gameService;
         this.gameTypeService = gameTypeService;
         this.commentService = commentService;
+        this.roleService = roleService;
     }
 
 
@@ -183,6 +185,17 @@ public class PostController {
         post.setUser(currentUser.getUser());
         postService.save(post);
         return "redirect:../user";
+    }
+
+    @RequestMapping("/post/delete/{id}")
+    public String deletePost(@AuthenticationPrincipal CurrentUser currentUser, @PathVariable Long id){
+        Post post = postService.findById(id);
+        if(currentUser.getAuthorities().stream().anyMatch(item-> item.getAuthority().equals("ROLE_ADMIN")) ||
+                currentUser.getUser().getId().equals(post.getUser().getId())){
+            postService.deleteById(id);
+            return "redirect:../../posts";
+        }
+        return "redirect:../../posts/" + id;
     }
 
     @RequestMapping("/posts/{postId}")

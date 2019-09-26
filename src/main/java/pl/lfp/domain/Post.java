@@ -62,6 +62,7 @@ public class Post {
     private User user;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
+    @OrderBy("created DESC")
     private List<Comment> comments;
 
     @PrePersist

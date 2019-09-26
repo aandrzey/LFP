@@ -1,5 +1,6 @@
 package pl.lfp.controller;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import pl.lfp.domain.Post;
 import pl.lfp.domain.User;
 import pl.lfp.domain.dto.UserDto;
 import pl.lfp.error.RegisterFailedException;
@@ -16,6 +18,7 @@ import pl.lfp.security.CurrentUser;
 import pl.lfp.service.UserService;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -62,7 +65,9 @@ public class UserController {
 
     @RequestMapping("/user")
     public String showUser(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
-        model.addAttribute("user", currentUser.getUser());
+        User user = userService.findUserByUsername(currentUser.getUser().getUsername());
+        Hibernate.initialize(user.getPosts());
+        model.addAttribute("user", user);
         return "user";
     }
 

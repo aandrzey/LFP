@@ -74,4 +74,9 @@ public class PostServiceImpl implements PostService {
     public void deleteByVenueId(Long venueId) {
         postRepository.deletePostsByVenueId(venueId);
     }
+
+    @Override
+    public void deleteById(Long id) {
+        postRepository.deleteById(id);
+    }
 }

@@ -13,10 +13,31 @@
     <script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
     <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/comment.css" rel="stylesheet">
+    <link href="/css/comment.css" rel="stylesheet">
+    <script src="/js/postDetails.js"></script>
 </head>
 <body>
 <%@include file="fragments/header.jspf" %>
+
+<div class="modal fade" id="modal" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Uwaga!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <a type="button" class="btn btn-secondary" data-dismiss="modal">Cofnij</a>
+                <a type="button" class="btn btn-primary ButtonModal"></a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container">
     <h2 class="page-header">Szczegóły ogłoszenia</h2>
     <p>Gra: ${post.game.name}</p>
@@ -25,16 +46,20 @@
     <p>Miejsce:
         <c:if test="${null == post.venue}">
             ${post.privateVenueName}</p>
-        </c:if>
-        <c:if test="${null != post.venue}">
-            ${post.venue.name}</p>
-            <p>Adres: ${post.venue.address}</p>
-        </c:if>
+    </c:if>
+    <c:if test="${null != post.venue}">
+        ${post.venue.name}</p>
+        <p>Adres: ${post.venue.address}</p>
+    </c:if>
     <p>Data i godzina rozpoczęcia: ${post.dateStart}</p>
     <p>Data i godzina zakończenia: ${post.dateStop}</p>
     <p>Typ gry ${post.gameType.name}</p>
     <p>Użytkownik: ${post.user.username}</p>
     <p>Data dodania: ${post.created}</p>
+
+    <sec:authorize access="hasRole('ADMIN')">
+        <button type="button" class="btn btn-primary btn-lg deleteButtonTable" data-id="${post.id}" data-toggle="modal" data-target="#modal">Usuń post</button>
+    </sec:authorize>
 
     <h2 class="page-header">Wiadomości</h2>
 
@@ -60,7 +85,7 @@
                             <c:forEach items="${post.comments}" var="comment">
                                 <li class="media">
                                     <a href="#" class="pull-left">
-                                        <img src="https://bootdey.com/img/Content/user_1.jpg" alt=""
+                                        <img src="/images/logo.png" alt=""
                                              class="rounded-circle">
                                     </a>
                                     <div class="media-body">

@@ -22,4 +22,5 @@ public interface PostService {
     Long count();
     void deleteByUserId(Long userId);
     void deleteByVenueId(Long venueId);
+    void deleteById(Long id);
 }

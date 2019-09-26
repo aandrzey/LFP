@@ -26,6 +26,41 @@
     <br><br>
     <a href="/venue">Dodaj miejsce</a>
 
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Miasto</th>
+            <th scope="col">Gra</th>
+            <th scope="col">Miejsce</th>
+            <th scope="col">Data i godzina</th>
+            <th scope="col">Typ gry</th>
+            <th scope="col">Użytkownik</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${user.posts}" var="post">
+            <tr>
+                <td>${post.city.name}</td>
+                <td>${post.game.name}</td>
+                <td>
+                    <c:if test="${null == post.venue}">
+                        ${post.privateVenueName}
+                    </c:if>
+                    <c:if test="${null != post.venue}">
+                        ${post.venue.name}
+                    </c:if>
+                </td>
+                <td>${post.dateStart}</td>
+                <td>${post.gameType.name}</td>
+                <td>${post.user.username}</td>
+                <td>
+                    <a href="/posts/${post.id}">Zobacz szczegóły</a>
+                </td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>
