@@ -12,15 +12,21 @@
     <script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
     <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/stylesheet.css" rel="stylesheet">
 </head>
 <body>
 <%@include file="fragments/header.jspf" %>
 <div class="container">
+    <header>Logowanie</header>
     <form method="post">
-        <div><label> User Name : <input type="text" name="username"/> </label></div>
-        <div><label> Password: <input type="password" name="password"/> </label></div>
-        <div><input type="submit" value="Sign In"/></div>
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <div class="form-group">
+            <div><label> User Name : <input type="text" class="form-control" name="username"/> </label></div>
+            <div><label> Password: <input type="password" class="form-control" name="password"/> </label></div>
+            <div>
+                <button class="btn btn-primary" type="submit">Zaloguj</button>
+            </div>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        </div>
     </form>
 </div>
 </body>

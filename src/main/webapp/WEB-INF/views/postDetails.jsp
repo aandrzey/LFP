@@ -14,7 +14,7 @@
     <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/comment.css" rel="stylesheet">
-    <script src="/js/postDetails.js"></script>
+    <script src="/js/modalDeletePost.js"></script>
 </head>
 <body>
 <%@include file="fragments/header.jspf" %>

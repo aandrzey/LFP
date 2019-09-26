@@ -66,6 +66,11 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public List<Post> findAllByGameName(String gameName) {
+        return postRepository.findAllByGameName(gameName);
+    }
+
+    @Override
     public void deleteByUserId(Long userId) {
         postRepository.deletePostsByUserId(userId);
     }

@@ -1,6 +1,5 @@
 $(document).ready(function () {
 
-    //let pageLinks = $(".page-link");
     let nextLi = $(".next");
     let previousLi = $('.previous');
     let activeLi = $('.page-item.active');

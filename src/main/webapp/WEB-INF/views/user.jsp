@@ -12,10 +12,28 @@
     <script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
     <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/js/modalDeletePost.js"></script>
 </head>
 <body>
 <%@include file="fragments/header.jspf"%>
-
+<div class="modal fade" id="modal" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Uwaga!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <a type="button" class="btn btn-secondary" data-dismiss="modal">Cofnij</a>
+                <a type="button" class="btn btn-primary ButtonModal"></a>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container">
     <h2>Profil użytkownika</h2>
     <p>Username: ${user.username}</p>
@@ -55,7 +73,10 @@
                 <td>${post.gameType.name}</td>
                 <td>${post.user.username}</td>
                 <td>
-                    <a href="/posts/${post.id}">Zobacz szczegóły</a>
+                    <a type="button" class="btn btn-primary" href="/posts/${post.id}">Zobacz szczegóły</a>
+                    <button type="button" class="btn btn-primary btn-lg deleteButtonTable" data-id="${post.id}"
+                            data-toggle="modal" data-target="#modal">Usuń post
+                    </button>
                 </td>
             </tr>
         </c:forEach>

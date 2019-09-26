@@ -20,6 +20,7 @@ public interface PostService {
     Post save(Post post);
     Post findById(Long id);
     Long count();
+    List<Post> findAllByGameName(String gameName);
     void deleteByUserId(Long userId);
     void deleteByVenueId(Long venueId);
     void deleteById(Long id);

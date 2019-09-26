@@ -32,7 +32,6 @@ public class PostController {
     private GameService gameService;
     private GameTypeService gameTypeService;
     private CommentService commentService;
-    private RoleService roleService;
 
     @Autowired
     public PostController(PostService postService,
@@ -40,32 +39,37 @@ public class PostController {
                           VenueService venueService,
                           GameService gameService,
                           GameTypeService gameTypeService,
-                          CommentService commentService, RoleService roleService) {
+                          CommentService commentService) {
         this.postService = postService;
         this.cityService = cityService;
         this.venueService = venueService;
         this.gameService = gameService;
         this.gameTypeService = gameTypeService;
         this.commentService = commentService;
-        this.roleService = roleService;
     }
 
 
     @RequestMapping("/posts")
-    public String showPosts(@RequestParam(defaultValue = "0") Integer pageNumber,
+    public String showPosts(@RequestParam(defaultValue = "0") Integer pageSize,
+                            @RequestParam(defaultValue = "0") Integer pageNumber,
                             @RequestParam(defaultValue = "") String city,
                             @RequestParam(defaultValue = "") String game,
                             @RequestParam(defaultValue = "") String dateString,
                             @RequestParam(defaultValue = "") String gameType,
                             Model model,
                             HttpSession session) {
-        Integer pageSize;
-        if (session.getAttribute("pageSize") == null) {
+
+        //Sprawdzenie i wybór iloścy wyświetlanych elementów na stronie
+        if (session.getAttribute("pageSize") == null && pageSize == 0) {
             pageSize = 10;
             session.setAttribute("pageSize", pageSize);
+        } else if (session.getAttribute("pageSize") != null && pageSize == 0) {
+            pageSize = (Integer) session.getAttribute("pageSize");
+        } else {
+            session.setAttribute("pageSize", pageSize);
         }
-        pageSize = (Integer) session.getAttribute("pageSize");
 
+        //Wstawienie dzisiejszej daty jeżeli nie ma wyszukiwania po dacie
         Date date;
         if ("".equals(dateString)) {
             date = new Date();
@@ -79,15 +83,16 @@ public class PostController {
             }
         }
 
-        //Liczenie postów
+        //Liczenie ilości pozycji do wyświetlenia
         Integer count = postService.countAllSearch(city, game, date, gameType);
         int pages;
-        if(count % pageSize == 0){
-            pages = count/pageSize;
+        if (count % pageSize == 0) {
+            pages = count / pageSize;
         } else {
-            pages = count/pageSize +1;
+            pages = count / pageSize + 1;
         }
 
+        //Dodawanie elementów do modelu
         model.addAttribute("citySearch", city);
         model.addAttribute("gameSearch", game);
         model.addAttribute("dateSearch", dateString);
@@ -98,11 +103,6 @@ public class PostController {
         return "posts";
     }
 
-    @RequestMapping("/posts/pageSize")
-    public String setPageSize(@RequestParam(name = "pageSize") Integer pageSize, HttpSession session) {
-        session.setAttribute("pageSize", pageSize);
-        return "redirect:../posts";
-    }
 
     @RequestMapping("/post")
     public String createPostPickCity(Model model) {
@@ -188,12 +188,12 @@ public class PostController {
     }
 
     @RequestMapping("/post/delete/{id}")
-    public String deletePost(@AuthenticationPrincipal CurrentUser currentUser, @PathVariable Long id){
+    public String deletePost(@AuthenticationPrincipal CurrentUser currentUser, @PathVariable Long id) {
         Post post = postService.findById(id);
-        if(currentUser.getAuthorities().stream().anyMatch(item-> item.getAuthority().equals("ROLE_ADMIN")) ||
-                currentUser.getUser().getId().equals(post.getUser().getId())){
+        if (currentUser.getAuthorities().stream().anyMatch(item -> item.getAuthority().equals("ROLE_ADMIN")) ||
+                currentUser.getUser().getId().equals(post.getUser().getId())) {
             postService.deleteById(id);
-            return "redirect:../../posts";
+            return "redirect:../../user";
         }
         return "redirect:../../posts/" + id;
     }

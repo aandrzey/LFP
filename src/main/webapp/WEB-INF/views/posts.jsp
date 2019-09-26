@@ -12,11 +12,11 @@
     <script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
     <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <script src="js/posts.js"></script>
+    <script src="/js/posts.js"></script>
 </head>
 <body>
-
 <%@include file="fragments/header.jspf" %>
+
 <div class="container">
     <div class="search">
         <form method="get">
@@ -43,16 +43,28 @@
     <div class="row pageSize">
         <label class="d-inline-block">Liczba elementów na stronie:</label>
         <div class="col-2">
-            <form class="d-inline-block" method="get" action="/posts/pageSize">
+            <form class="d-inline-block" method="get" action="/posts">
                 <input type="hidden" name="pageSize" value="10">
+                <input type="hidden" name="city" value="${citySearch}">
+                <input type="hidden" name="game" value="${gameSearch}">
+                <input type="hidden" name="dateString" value="${dateSearch}">
+                <input type="hidden" name="gameType" value="${gameTypeSearch}">
                 <button class="btn btn-primary">10</button>
             </form>
-            <form class="d-inline-block" method="get" action="/posts/pageSize">
+            <form class="d-inline-block" method="get" action="/posts">
                 <input type="hidden" name="pageSize" value="50">
                 <button class="btn btn-primary">50</button>
+                <input type="hidden" name="city" value="${citySearch}">
+                <input type="hidden" name="game" value="${gameSearch}">
+                <input type="hidden" name="dateString" value="${dateSearch}">
+                <input type="hidden" name="gameType" value="${gameTypeSearch}">
             </form>
-            <form class="d-inline-block" method="get" action="/posts/pageSize">
+            <form class="d-inline-block" method="get" action="/posts">
                 <input type="hidden" name="pageSize" value="100">
+                <input type="hidden" name="city" value="${citySearch}">
+                <input type="hidden" name="game" value="${gameSearch}">
+                <input type="hidden" name="dateString" value="${dateSearch}">
+                <input type="hidden" name="gameType" value="${gameTypeSearch}">
                 <button class="btn btn-primary">100</button>
             </form>
         </div>
@@ -87,7 +99,7 @@
                 <td>${post.gameType.name}</td>
                 <td>${post.user.username}</td>
                 <td>
-                    <a href="/posts/${post.id}">Zobacz szczegóły</a>
+                    <a type="button" class="btn btn-primary" href="/posts/${post.id}">Zobacz szczegóły</a>
                 </td>
             </tr>
         </c:forEach>
@@ -97,24 +109,28 @@
     <nav aria-label="...">
         <ul class="pagination">
             <li class="page-item previous">
-                <a class="page-link" href="/posts?pageNumber=${currentPage-1}&city=${citySearch}&game=${gameSearch}&dateString=${dateSearch}&gameType=${gameTypeSearch}">Previous</a>
+                <a class="page-link"
+                   href="/posts?pageNumber=${currentPage-1}&city=${citySearch}&game=${gameSearch}&dateString=${dateSearch}&gameType=${gameTypeSearch}">Previous</a>
             </li>
             <c:forEach begin="1" end="${pages}" varStatus="loop">
                 <c:if test="${loop.count == currentPage+1}">
                     <li class="page-item active">
-                        <a class="page-link" href="/posts?pageNumber=${loop.count-1}&city=${citySearch}&game=${gameSearch}&dateString=${dateSearch}&gameType=${gameTypeSearch}">${loop.count}
+                        <a class="page-link"
+                           href="/posts?pageNumber=${loop.count-1}&city=${citySearch}&game=${gameSearch}&dateString=${dateSearch}&gameType=${gameTypeSearch}">${loop.count}
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
                 </c:if>
                 <c:if test="${loop.count != currentPage+1}">
                     <li class="page-item">
-                        <a class="page-link" href="/posts?pageNumber=${loop.count-1}&city=${citySearch}&game=${gameSearch}&dateString=${dateSearch}&gameType=${gameTypeSearch}">${loop.count}</a>
+                        <a class="page-link"
+                           href="/posts?pageNumber=${loop.count-1}&city=${citySearch}&game=${gameSearch}&dateString=${dateSearch}&gameType=${gameTypeSearch}">${loop.count}</a>
                     </li>
                 </c:if>
             </c:forEach>
             <li class="page-item next">
-                <a class="page-link" href="/posts?pageNumber=${currentPage+1}&city=${citySearch}&game=${gameSearch}&dateString=${dateSearch}&gameType=${gameTypeSearch}">Next</a>
+                <a class="page-link"
+                   href="/posts?pageNumber=${currentPage+1}&city=${citySearch}&game=${gameSearch}&dateString=${dateSearch}&gameType=${gameTypeSearch}">Next</a>
             </li>
         </ul>
     </nav>

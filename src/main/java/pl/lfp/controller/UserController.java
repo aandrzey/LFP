@@ -10,7 +10,6 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import pl.lfp.domain.Post;
 import pl.lfp.domain.User;
 import pl.lfp.domain.dto.UserDto;
 import pl.lfp.error.RegisterFailedException;
@@ -18,7 +17,7 @@ import pl.lfp.security.CurrentUser;
 import pl.lfp.service.UserService;
 
 import javax.validation.Valid;
-import java.util.List;
+
 
 @Controller
 public class UserController {

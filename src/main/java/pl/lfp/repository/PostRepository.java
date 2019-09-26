@@ -25,6 +25,8 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Query("select p from Post p where p.dateStart >= ?1")
     List<Post>findDate(Date date);
 
+    List<Post>findAllByGameName(String gameName);
+
     @Modifying
     void deletePostsByUserId(Long userId);
 
