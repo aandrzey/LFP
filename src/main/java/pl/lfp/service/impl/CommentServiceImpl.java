@@ -6,7 +6,10 @@ import pl.lfp.domain.Comment;
 import pl.lfp.repository.CommentRepository;
 import pl.lfp.service.CommentService;
 
+import javax.transaction.Transactional;
+
 @Service
+@Transactional
 public class CommentServiceImpl implements CommentService {
 
     private final CommentRepository commentRepository;
@@ -19,5 +22,10 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public Comment save(Comment comment) {
         return commentRepository.save(comment);
+    }
+
+    @Override
+    public void deleteByUserId(Long userId) {
+        commentRepository.deleteCommentsByUserId(userId);
     }
 }

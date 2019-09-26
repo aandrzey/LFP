@@ -6,7 +6,10 @@ import pl.lfp.domain.Role;
 import pl.lfp.repository.RoleRepository;
 import pl.lfp.service.RoleService;
 
+import javax.transaction.Transactional;
+
 @Service
+@Transactional
 public class RoleServiceImpl implements RoleService {
 
     private final RoleRepository roleRepository;

@@ -24,12 +24,12 @@
     <p>Miasto: ${post.city.name}</p>
     <p>Miejsce:
         <c:if test="${null == post.venue}">
-            ${post.privateVenueName}
+            ${post.privateVenueName}</p>
         </c:if>
         <c:if test="${null != post.venue}">
-            ${post.venue.name}
+            ${post.venue.name}</p>
+            <p>Adres: ${post.venue.address}</p>
         </c:if>
-    </p>
     <p>Data i godzina rozpoczęcia: ${post.dateStart}</p>
     <p>Data i godzina zakończenia: ${post.dateStop}</p>
     <p>Typ gry ${post.gameType.name}</p>
@@ -45,7 +45,7 @@
                 <div class="panel panel-info">
                     <div class="panel-body">
                         <sec:authorize access="isAuthenticated()">
-                            <form:form modelAttribute="commentDto" method="post" action="/post/${post.id}/comment">
+                            <form:form modelAttribute="commentDto" method="post" action="/posts/${post.id}/comment">
                                 <div>
                                     <label for="idContent">Dodaj komentarz:</label>
                                     <form:textarea path="content" maxlenght="300" rows="3" cols="80" id="idContent"/>

@@ -61,7 +61,8 @@ public class UserController {
     }
 
     @RequestMapping("/user")
-    public String showUser() {
+    public String showUser(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
+        model.addAttribute("user", currentUser.getUser());
         return "user";
     }
 

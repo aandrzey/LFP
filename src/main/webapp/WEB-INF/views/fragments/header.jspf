@@ -19,7 +19,7 @@
                 <a class="nav-link" href="#">Pricing</a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLinkUser" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Użytkownik
                 </a>
@@ -33,6 +33,19 @@
                     </sec:authorize>
                 </div>
             </li>
+            <sec:authorize access="hasRole('ADMIN')">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLinkAdmin" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Panel administratora
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/admin/users">Użytkownicy</a>
+                        <a class="dropdown-item" href="/admin/venues/toVerify">Miejsca (do akceptacji)</a>
+                        <a class="dropdown-item" href="/admin/venues/verified">Miejsca (zaakceptowane)</a>
+                </div>
+            </li>
+            </sec:authorize>
         </ul>
         <ul class="navbar-nav ml-auto">
             <sec:authorize access="isAuthenticated()">

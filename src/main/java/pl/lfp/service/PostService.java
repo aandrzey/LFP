@@ -11,12 +11,15 @@ public interface PostService {
                        Integer pageSize,
                        String city,
                        String game,
-                       String venue,
                        Date date,
                        String gameType);
-    List<Post> findAll(Integer pageNumber, Integer pageSize);
+    Integer countAllSearch(String city,
+                           String game,
+                           Date date,
+                           String gameType);
     Post save(Post post);
     Post findById(Long id);
-    List<Post>findDate(Date date);
     Long count();
+    void deleteByUserId(Long userId);
+    void deleteByVenueId(Long venueId);
 }

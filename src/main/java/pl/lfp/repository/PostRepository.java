@@ -3,6 +3,7 @@ package pl.lfp.repository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import pl.lfp.domain.Post;
@@ -12,18 +13,22 @@ import java.util.List;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
 
-    @Query("select p from Post p where p.city.name like %:city% and p.game.name like %:game% and p.venue.name like %:venue% and p.gameType.name like %:gameType% and p.dateStart >= :date")
-    Page<Post> findAllSearch(@Param("city") String city,
+    @Query("select p from Post p where p.city.name like %:city% and p.game.name like %:game% and p.gameType.name like %:gameType% and p.dateStart >= :date")
+    List<Post> findAllSearch(@Param("city") String city,
                              @Param("game") String game,
-                             @Param("venue") String venue,
                              @Param("date") Date date,
-                             @Param("gameType") String gameType,
-                             Pageable paging);
+                             @Param("gameType") String gameType);
 
 
-    //Page<Post> findAllByCityNameContainingAndGameNameContainingAndVenueNameContainingAndDateStartAfterAndGameTypeNameContaining(String cityName, String gameName, String venueName, Date date, String gameType, Pageable paging);
+    Page<Post> findAllByCityNameContainingAndGameNameContainingAndDateStartIsAfterAndGameTypeNameContaining(String cityName, String gameName,Date dateStart, String gameType, Pageable paging);
 
     @Query("select p from Post p where p.dateStart >= ?1")
     List<Post>findDate(Date date);
+
+    @Modifying
+    void deletePostsByUserId(Long userId);
+
+    @Modifying
+    void deletePostsByVenueId(Long venueId);
 
 }

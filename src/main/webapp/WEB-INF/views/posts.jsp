@@ -22,23 +22,19 @@
         <form method="get">
             <div>
                 <label for="idCity">Miasto:</label>
-                <input type="text" name="city" id="idCity">
+                <input type="text" name="city" id="idCity" value="${citySearch}">
             </div>
             <div>
                 <label for="idGame">Gra:</label>
-                <input type="text" name="game" id="idGame">
-            </div>
-            <div>
-                <label for="idVenue">Miejsce:</label>
-                <input type="text" name="venue" id="idVenue">
+                <input type="text" name="game" id="idGame" value="${gameSearch}">
             </div>
             <div>
                 <label for="idDate">Data</label>
-                <input type="date" name="dateString" id="idDate">
+                <input type="date" name="dateString" id="idDate" value="${dateSearch}">
             </div>
             <div>
                 <label for="idGameType">Typ gry:</label>
-                <input type="text" name="gameType" id="idGameType">
+                <input type="text" name="gameType" id="idGameType" value="${gameTypeSearch}">
             </div>
             <input type="submit" value="Wyszukaj">
         </form>
@@ -91,7 +87,7 @@
                 <td>${post.gameType.name}</td>
                 <td>${post.user.username}</td>
                 <td>
-                    <a href="/post/${post.id}">Zobacz szczegóły</a>
+                    <a href="/posts/${post.id}">Zobacz szczegóły</a>
                 </td>
             </tr>
         </c:forEach>
@@ -101,24 +97,24 @@
     <nav aria-label="...">
         <ul class="pagination">
             <li class="page-item previous">
-                <a class="page-link" href="/posts?pageNumber=${currentPage-1}">Previous</a>
+                <a class="page-link" href="/posts?pageNumber=${currentPage-1}&city=${citySearch}&game=${gameSearch}&dateString=${dateSearch}&gameType=${gameTypeSearch}">Previous</a>
             </li>
             <c:forEach begin="1" end="${pages}" varStatus="loop">
                 <c:if test="${loop.count == currentPage+1}">
                     <li class="page-item active">
-                        <a class="page-link" href="/posts?pageNumber=${loop.count-1}">${loop.count}
+                        <a class="page-link" href="/posts?pageNumber=${loop.count-1}&city=${citySearch}&game=${gameSearch}&dateString=${dateSearch}&gameType=${gameTypeSearch}">${loop.count}
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
                 </c:if>
                 <c:if test="${loop.count != currentPage+1}">
                     <li class="page-item">
-                        <a class="page-link" href="/posts?pageNumber=${loop.count-1}">${loop.count}</a>
+                        <a class="page-link" href="/posts?pageNumber=${loop.count-1}&city=${citySearch}&game=${gameSearch}&dateString=${dateSearch}&gameType=${gameTypeSearch}">${loop.count}</a>
                     </li>
                 </c:if>
             </c:forEach>
             <li class="page-item next">
-                <a class="page-link" href="/posts?pageNumber=${currentPage+1}">Next</a>
+                <a class="page-link" href="/posts?pageNumber=${currentPage+1}&city=${citySearch}&game=${gameSearch}&dateString=${dateSearch}&gameType=${gameTypeSearch}">Next</a>
             </li>
         </ul>
     </nav>

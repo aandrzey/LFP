@@ -16,5 +16,6 @@ public interface UserService {
     void updateUser(User user, UserDto userDto);
     boolean isUsernameUnique(String username);
     boolean isEmailUnique(String email);
+    void deleteUserById(Long id);
 
 }

@@ -6,9 +6,11 @@ import pl.lfp.domain.GameType;
 import pl.lfp.repository.GameTypeRepository;
 import pl.lfp.service.GameTypeService;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class GameTypeServiceImpl implements GameTypeService {
 
     private GameTypeRepository gameTypeRepository;

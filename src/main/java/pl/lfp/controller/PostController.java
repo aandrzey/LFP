@@ -53,7 +53,6 @@ public class PostController {
     public String showPosts(@RequestParam(defaultValue = "0") Integer pageNumber,
                             @RequestParam(defaultValue = "") String city,
                             @RequestParam(defaultValue = "") String game,
-                            @RequestParam(defaultValue = "") String venue,
                             @RequestParam(defaultValue = "") String dateString,
                             @RequestParam(defaultValue = "") String gameType,
                             Model model,
@@ -63,8 +62,9 @@ public class PostController {
             pageSize = 10;
             session.setAttribute("pageSize", pageSize);
         }
-        Date date;
+        pageSize = (Integer) session.getAttribute("pageSize");
 
+        Date date;
         if ("".equals(dateString)) {
             date = new Date();
         } else {
@@ -76,17 +76,23 @@ public class PostController {
                 date = null;
             }
         }
-        pageSize = (Integer) session.getAttribute("pageSize");
 
         //Liczenie postów
-        Long count = postService.count();
-        Integer pages = count.intValue()/pageSize +1;
+        Integer count = postService.countAllSearch(city, game, date, gameType);
+        int pages;
+        if(count % pageSize == 0){
+            pages = count/pageSize;
+        } else {
+            pages = count/pageSize +1;
+        }
 
+        model.addAttribute("citySearch", city);
+        model.addAttribute("gameSearch", game);
+        model.addAttribute("dateSearch", dateString);
+        model.addAttribute("gameTypeSearch", gameType);
         model.addAttribute("pages", pages);
         model.addAttribute("currentPage", pageNumber);
-        model.addAttribute("posts", postService.findAll(pageNumber, pageSize));
-        //model.addAttribute("posts", postService.findAllSearch(pageNumber, pageSize, city, game, venue, date, gameType));
-        //model.addAttribute("posts", postService.findDate(date));
+        model.addAttribute("posts", postService.findAllSearch(pageNumber, pageSize, city, game, date, gameType));
         return "posts";
     }
 
@@ -179,14 +185,14 @@ public class PostController {
         return "redirect:../user";
     }
 
-    @RequestMapping("/post/{postId}")
+    @RequestMapping("/posts/{postId}")
     public String postDetails(@PathVariable Long postId, Model model) {
         model.addAttribute("post", postService.findById(postId));
         model.addAttribute("commentDto", new CommentDto());
         return "postDetails";
     }
 
-    @RequestMapping(value = "/post/{postId}/comment", method = RequestMethod.POST)
+    @RequestMapping(value = "/posts/{postId}/comment", method = RequestMethod.POST)
     public String postAddComment(@PathVariable Long postId,
                                  @ModelAttribute @Valid CommentDto commentDto,
                                  BindingResult result,
@@ -201,7 +207,7 @@ public class PostController {
         comment.setPost(postService.findById(postId));
         comment.setUser(currentUser.getUser());
         commentService.save(comment);
-        return "redirect:/post/" + postId;
+        return "redirect:/posts/" + postId;
     }
 
     @ModelAttribute(name = "cities")

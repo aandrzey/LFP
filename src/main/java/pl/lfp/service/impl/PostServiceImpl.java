@@ -9,11 +9,13 @@ import pl.lfp.domain.Post;
 import pl.lfp.repository.PostRepository;
 import pl.lfp.service.PostService;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Service
+@Transactional
 public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
@@ -28,11 +30,10 @@ public class PostServiceImpl implements PostService {
                                     Integer pageSize,
                                     String city,
                                     String game,
-                                    String venue,
                                     Date date,
                                     String gameType) {
         Pageable paging = PageRequest.of(pageNumber, pageSize);
-        Page<Post> pagedResult = postRepository.findAllSearch(city, game, venue, date, gameType, paging);
+        Page<Post> pagedResult = postRepository.findAllByCityNameContainingAndGameNameContainingAndDateStartIsAfterAndGameTypeNameContaining(city, game, date,gameType, paging);
 
         if (pagedResult.hasContent()) {
             return pagedResult.getContent();
@@ -42,15 +43,8 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<Post> findAll(Integer pageNumber, Integer pageSize) {
-        Pageable paging = PageRequest.of(pageNumber, pageSize);
-        Page<Post> pagedResult = postRepository.findAll(paging);
-
-        if (pagedResult.hasContent()) {
-            return pagedResult.getContent();
-        } else {
-            return new ArrayList<Post>();
-        }
+    public Integer countAllSearch(String city, String game, Date date, String gameType) {
+        return postRepository.findAllSearch(city, game, date, gameType).size();
     }
 
     @Override
@@ -67,12 +61,17 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<Post> findDate(Date date) {
-        return postRepository.findDate(date);
+    public Long count() {
+        return postRepository.count();
     }
 
     @Override
-    public Long count() {
-        return postRepository.count();
+    public void deleteByUserId(Long userId) {
+        postRepository.deletePostsByUserId(userId);
+    }
+
+    @Override
+    public void deleteByVenueId(Long venueId) {
+        postRepository.deletePostsByVenueId(venueId);
     }
 }

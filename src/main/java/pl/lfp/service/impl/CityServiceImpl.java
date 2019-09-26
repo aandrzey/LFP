@@ -6,9 +6,11 @@ import pl.lfp.domain.City;
 import pl.lfp.repository.CityRepository;
 import pl.lfp.service.CityService;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class CityServiceImpl implements CityService {
 
     private final CityRepository cityRepository;

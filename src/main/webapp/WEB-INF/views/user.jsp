@@ -9,17 +9,17 @@
 <html>
 <head>
     <title>Title</title>
-    <script src="webjars/jquery/3.0.0/jquery.min.js"></script>
-    <script src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <link href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <%@include file="fragments/header.jspf"%>
 
 <div class="container">
     <h2>Profil użytkownika</h2>
-    <p>Username: <sec:authentication property="principal.user.username"/></p>
-    <p>Email: <sec:authentication property="principal.user.email"/></p>
+    <p>Username: ${user.username}</p>
+    <p>Email: ${user.email}</p>
     <a href="/update">Edytuj</a>
     <br><br>
     <a href="/post">Dodaj post</a>

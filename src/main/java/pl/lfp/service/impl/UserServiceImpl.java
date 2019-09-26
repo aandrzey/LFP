@@ -11,11 +11,13 @@ import pl.lfp.repository.RoleRepository;
 import pl.lfp.repository.UserRepository;
 import pl.lfp.service.UserService;
 
+import javax.transaction.Transactional;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
@@ -92,6 +94,11 @@ public class UserServiceImpl implements UserService {
     public boolean isEmailUnique(String email) {
         User user = userRepository.findByEmail(email);
         return user == null;
+    }
+
+    @Override
+    public void deleteUserById(Long id) {
+        userRepository.deleteById(id);
     }
 
 }

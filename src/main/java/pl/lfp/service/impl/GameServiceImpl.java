@@ -6,9 +6,11 @@ import pl.lfp.domain.Game;
 import pl.lfp.repository.GameRepository;
 import pl.lfp.service.GameService;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class GameServiceImpl implements GameService {
 
     private final GameRepository gameRepository;
