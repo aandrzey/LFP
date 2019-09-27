@@ -8,10 +8,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>LFP - Looking for player</title>
     <script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
     <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/stylesheet.css" rel="stylesheet">
     <script src="/js/venues.js"></script>
 </head>
 <body>
@@ -29,7 +30,7 @@
             </div>
             <div class="modal-body"></div>
             <div class="modal-footer">
-                <a type="button" class="btn btn-secondary" data-dismiss="modal">Cofnij</a>
+                <a type="button" class="btn btn-primary" data-dismiss="modal">Cofnij</a>
                 <a type="button" class="btn btn-primary ButtonModal"></a>
             </div>
         </div>
@@ -37,17 +38,11 @@
 </div>
 
 <div class="container">
-
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-            <h1 class="display-4">Miejsca</h1>
-            <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
-        </div>
-    </div>
-
+    <header>Miejsca</header>
     <ul class="nav nav-tabs">
         <li class="nav-item">
-            <a class="nav-link <c:if test="${verified != true}">active</c:if>" href="/admin/venues/toVerify">Do weryfikacji</a>
+            <a class="nav-link <c:if test="${verified != true}">active</c:if>" href="/admin/venues/toVerify">Do
+                weryfikacji</a>
         </li>
         <li class="nav-item">
             <a class="nav-link <c:if test="${verified == true}">active</c:if>" href="/admin/venues/verified">Zweryfikowane</a>
@@ -73,11 +68,13 @@
                 <td>${venue.address}</td>
                 <td>
                     <c:if test="${venue.verified == false}">
-                        <button type="button" data-name="${venue.name}" data-id="${venue.id}" class="btn btn-primary verifyButtonTable" data-toggle="modal" data-target="#modal">
+                        <button type="button" data-name="${venue.name}" data-id="${venue.id}"
+                                class="btn btn-primary verifyButtonTable" data-toggle="modal" data-target="#modal">
                             Zweryfikuj miejsce
                         </button>
                     </c:if>
-                    <button type="button" data-name="${venue.name}" data-id="${venue.id}" class="btn btn-primary deleteButtonTable" data-toggle="modal" data-target="#modal">
+                    <button type="button" data-name="${venue.name}" data-id="${venue.id}"
+                            class="btn btn-primary deleteButtonTable" data-toggle="modal" data-target="#modal">
                         Usuń miejsce
                     </button>
                 </td>

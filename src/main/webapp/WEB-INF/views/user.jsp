@@ -8,14 +8,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>LFP - Looking for player</title>
     <script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
     <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/stylesheet.css" rel="stylesheet">
     <script src="/js/modalDeletePost.js"></script>
 </head>
 <body>
-<%@include file="fragments/header.jspf"%>
+<%@include file="fragments/header.jspf" %>
+
 <div class="modal fade" id="modal" tabindex="-1" role="dialog"
      aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -34,16 +36,26 @@
         </div>
     </div>
 </div>
-<div class="container">
-    <h2>Profil użytkownika</h2>
-    <p>Username: ${user.username}</p>
-    <p>Email: ${user.email}</p>
-    <a href="/update">Edytuj</a>
-    <br><br>
-    <a href="/post">Dodaj post</a>
-    <br><br>
-    <a href="/venue">Dodaj miejsce</a>
 
+<div class="container">
+
+    <header>Profil użytkownika</header>
+
+    <div class="row">
+        <p class="col-md-3">Username:</p>
+        <p class="col-md-auto">${user.username}</p>
+    </div>
+    <div class="row">
+        <p class="col-md-3">Email:</p>
+        <p class="col-md-auto">${user.email}</p>
+    </div>
+    <br>
+    <a class="btn btn-primary" href="/update">Edytuj dane</a>
+    <a class="btn btn-primary" href="/post">Dodaj nowy post</a>
+    <a class="btn btn-primary" href="/venue">Zaproponuj nowe miejsce</a>
+    <br>
+    <br>
+    <header>Twoje ogłoszenia:</header>
     <table class="table table-hover">
         <thead>
         <tr>
@@ -74,7 +86,7 @@
                 <td>${post.user.username}</td>
                 <td>
                     <a type="button" class="btn btn-primary" href="/posts/${post.id}">Zobacz szczegóły</a>
-                    <button type="button" class="btn btn-primary btn-lg deleteButtonTable" data-id="${post.id}"
+                    <button type="button" class="btn btn-primary deleteButtonTable" data-id="${post.id}"
                             data-toggle="modal" data-target="#modal">Usuń post
                     </button>
                 </td>

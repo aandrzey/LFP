@@ -8,10 +8,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>LFP - Looking for player</title>
     <script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
     <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/stylesheet.css" rel="stylesheet">
     <script src="/js/users.js"></script>
 </head>
 <body>
@@ -37,7 +38,7 @@
 </div>
 
 <div class="container">
-
+    <header>Użytkownicy</header>
     <table class="table table-hover">
         <thead>
         <tr>

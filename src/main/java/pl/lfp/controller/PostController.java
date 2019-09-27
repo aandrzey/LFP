@@ -105,8 +105,11 @@ public class PostController {
 
 
     @RequestMapping("/post")
-    public String createPostPickCity(Model model) {
+    public String createPostPickCity(Model model, HttpSession session) {
         model.addAttribute("postCityDto", new PostCityDto());
+        if (session.getAttribute("postDto") != null) {
+            session.setAttribute("postDto", new PostDto());
+        }
         return "post1";
     }
 

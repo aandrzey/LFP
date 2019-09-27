@@ -4,15 +4,15 @@ document.addEventListener("DOMContentLoaded", function (evt) {
     let venueName = document.querySelector("#privateVenueName");
     let checkbox = document.querySelector("#idPrivateVenue");
 
-    venueName.style.display = "none";
+    venueName.style.visibility = "hidden";
 
     checkbox.addEventListener("click", function () {
         if($(this).is(":checked")){
-            venue.style.display = "none";
-            venueName.style.display = "block";
+            venue.style.visibility = "hidden";
+            venueName.style.visibility = "visible";
         } else {
-            venue.style.display = "block";
-            venueName.style.display = "none";
+            venue.style.visibility = "visible";
+            venueName.style.visibility = "hidden";
         }
 
     })

@@ -8,40 +8,50 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>LFP - Looking for player</title>
     <script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
     <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/stylesheet.css" rel="stylesheet">
     <script src="/js/posts.js"></script>
 </head>
 <body>
 <%@include file="fragments/header.jspf" %>
 
 <div class="container">
+
+    <header>Aktualne ogłoszenia (domyślnie pokazywane są tylko te ogłoszenie które się jeszcze nie odbyły)</header>
+    <br>
+
     <div class="search">
         <form method="get">
-            <div>
-                <label for="idCity">Miasto:</label>
-                <input type="text" name="city" id="idCity" value="${citySearch}">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="idCity">Miasto:</label>
+                        <input type="text" name="city" id="idCity" value="${citySearch}" class="form-control">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="idGame">Gra:</label>
+                        <input type="text" name="game" id="idGame" value="${gameSearch}" class="form-control">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="idDate">Data</label>
+                        <input type="date" name="dateString" id="idDate" value="${dateSearch}" class="form-control">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="idGameType">Typ gry:</label>
+                        <input type="text" name="gameType" id="idGameType" value="${gameTypeSearch}"
+                               class="form-control">
+                    </div>
+                </div>
             </div>
-            <div>
-                <label for="idGame">Gra:</label>
-                <input type="text" name="game" id="idGame" value="${gameSearch}">
-            </div>
-            <div>
-                <label for="idDate">Data</label>
-                <input type="date" name="dateString" id="idDate" value="${dateSearch}">
-            </div>
-            <div>
-                <label for="idGameType">Typ gry:</label>
-                <input type="text" name="gameType" id="idGameType" value="${gameTypeSearch}">
-            </div>
-            <input type="submit" value="Wyszukaj">
+            <button type="submit" class="btn btn-primary">Wyszukaj</button>
         </form>
     </div>
 
-    <div class="row pageSize">
-        <label class="d-inline-block">Liczba elementów na stronie:</label>
+    <div class="row pageSize ml-1">
+        <label class="d-inline-block pt-2">Liczba elementów na stronie:</label>
         <div class="col-2">
             <form class="d-inline-block" method="get" action="/posts">
                 <input type="hidden" name="pageSize" value="10">
