@@ -108,7 +108,7 @@ public class PostController {
     public String createPostPickCity(Model model, HttpSession session) {
         model.addAttribute("postCityDto", new PostCityDto());
         if (session.getAttribute("postDto") != null) {
-            session.setAttribute("postDto", new PostDto());
+            model.addAttribute("postDto", new PostDto());
         }
         return "post1";
     }
